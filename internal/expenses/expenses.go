@@ -21,23 +21,24 @@ func FindElementsThatSum(expenses []int, target int, size int) []int {
 				}
 
 				toCheck := append(possible, expense)
-				if i < size-1 {
-					if sum(toCheck) < target {
-						newPossibles = append(newPossibles, toCheck)
-					}
-				} else {
-					if sum(toCheck) == target {
-						newPossibles = append(newPossibles, toCheck)
-					}
+
+				if i == size && sum(toCheck) == target {
+					return toCheck
+				}
+
+				if i < size-1 && sum(toCheck) < target {
+					newPossibles = append(newPossibles, toCheck)
 				}
 			}
 		}
 		if len(newPossibles) > 0 {
 			possibles = newPossibles
+		} else {
+			return nil
 		}
 	}
 
-	return possibles[0]
+	return nil
 }
 
 func sum(array []int) int {
