@@ -1,36 +1,58 @@
 package expenses
 
-func FindSumToPair(expenses []int, target int) []int {
-	for idxA, valueA := range expenses {
-		for idxB, valueB := range expenses {
-			if idxA == idxB {
-				continue
-			}
+func FindElementsThatSum(expenses []int, target int, size int) []int {
+	if size < 2 {
+		panic("Bad input")
+	}
 
-			if valueA+valueB == target {
-				return []int{valueA, valueB}
-			}
+	possibles := [][]int{}
+	for _, val := range expenses {
+		if val < target {
+			possibles = append(possibles, []int{val})
 		}
 	}
-	return nil
-}
 
-func FindSumToTriple(expenses []int, target int) []int {
-	for idxA, valueA := range expenses {
-		for idxB, valueB := range expenses {
-			if idxA == idxB {
-				continue
-			}
-
-			for idxC, valueC := range expenses {
-				if idxC == idxA || idxC == idxB {
+	for i := 1; i < size; i++ {
+		newPossibles := [][]int{}
+		for _, possible := range possibles {
+			for _, expense := range expenses {
+				if contains(possible, expense) {
 					continue
 				}
-				if valueA+valueB+valueC == target {
-					return []int{valueA, valueB, valueC}
+
+				toCheck := append(possible, expense)
+				if i < size-1 {
+					if sum(toCheck) < target {
+						newPossibles = append(newPossibles, toCheck)
+					}
+				} else {
+					if sum(toCheck) == target {
+						newPossibles = append(newPossibles, toCheck)
+					}
 				}
 			}
 		}
+		if len(newPossibles) > 0 {
+			possibles = newPossibles
+		}
 	}
-	return nil
+
+	return possibles[0]
+}
+
+func sum(array []int) int {
+	sum := 0
+	for _, val := range array {
+		sum += val
+	}
+	return sum
+}
+
+func contains(s []int, e int) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
 }

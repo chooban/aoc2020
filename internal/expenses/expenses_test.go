@@ -5,18 +5,22 @@ import (
 	"testing"
 )
 
-func TestSumTo(t *testing.T) {
+func TestSumToTarget(t *testing.T) {
 	expected := []int{1, 3}
-	total := FindSumToPair([]int{1, 3, 4, 5}, 4)
+	total := FindElementsThatSum([]int{1, 3, 4, 5}, 4, 2)
 
 	if !reflect.DeepEqual(expected, total) {
 		t.Errorf("Pair was incorrect, got {%d, %d}", total[0], total[1])
 	}
 }
 
-func TestSumToTriple(t *testing.T) {
+func TestSumToTargetAgain(t *testing.T) {
 	expected := []int{1, 3, 4}
-	total := FindSumToTriple([]int{1, 3, 4, 5}, 8)
+	total := FindElementsThatSum([]int{1, 3, 4, 5}, 8, 3)
+
+	if total == nil {
+		t.Errorf("No values found")
+	}
 
 	if !reflect.DeepEqual(expected, total) {
 		t.Errorf("Pair was incorrect, got {%d, %d, %d}", total[0], total[1], total[2])

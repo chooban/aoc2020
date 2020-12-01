@@ -28,13 +28,18 @@ func main() {
 		numbers = append(numbers, j)
 	}
 
-	fmt.Println("Double answer is", expenses.FindSumToPair(numbers, 2020))
-	fmt.Println("Product is", Product(expenses.FindSumToPair(numbers, 2020)))
-	fmt.Println("Triple answer is", expenses.FindSumToTriple(numbers, 2020))
-	fmt.Println("Product is", Product(expenses.FindSumToTriple(numbers, 2020)))
+	dblAnswer := expenses.FindElementsThatSum(numbers, 2020, 2)
+	tripleAnswer := expenses.FindElementsThatSum(numbers, 2020, 3)
+
+	fmt.Println("Double answer is", dblAnswer)
+	fmt.Println("Product is", product(dblAnswer))
+
+	fmt.Println("Triple answer is", tripleAnswer)
+	fmt.Println("Product is", product(tripleAnswer))
+
 }
 
-func Product(array []int) int {
+func product(array []int) int {
 	result := 1
 	for _, v := range array {
 		result *= v
