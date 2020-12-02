@@ -22,7 +22,7 @@ func FindElementsThatSum(expenses []int, target int, size int) []int {
 
 				toCheck := append(possible, expense)
 
-				if i == size && sum(toCheck) == target {
+				if i == size-1 && sum(toCheck) == target {
 					return toCheck
 				}
 
@@ -31,6 +31,7 @@ func FindElementsThatSum(expenses []int, target int, size int) []int {
 				}
 			}
 		}
+
 		if len(newPossibles) > 0 {
 			possibles = newPossibles
 		} else {
