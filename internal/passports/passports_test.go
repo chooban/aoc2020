@@ -4,7 +4,7 @@ import "testing"
 
 func TestValidateHgt(t *testing.T) {
 	heights := []string{
-		"hgt:157cm",
+		"157cm",
 	}
 
 	for _, height := range heights {
